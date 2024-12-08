@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers' Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf3e3; /* Light cream background */
+            color: #4b2e2e; /* Dark brown text */
+        }
+        header {
+            background-color: #d2b48c; /* Light brown */
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            background-color: #8b5e3c; /* Dark brown */
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar ul li {
+            margin: 0;
+        }
+        .navbar a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #a75d3c; /* Lighter brown for hover */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #8b5e3c; /* Dark brown */
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background-color: #f8f1e7; /* Very light brown */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product-card h3 {
+            margin: 0.5rem 0;
+            color: #4b2e2e; /* Dark brown */
+        }
+        .product-card p {
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+        .product-card button {
+            background-color: #d2b48c; /* Light brown */
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .product-card button:hover {
+            background-color: #a75d3c; /* Hover color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Farmers' Market</h1>
+        <p>Support farmers by buying value-added agricultural products</p>
+    </header>
+      
+    <nav>
+        <div class="navbar">
+            <ul>
+                <li><a href="/user/index">Home</a></li>
+                <li><a href="/user/about">About</a></li>  
+                <li><a href="/user/buyproducts">Products</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Available Products</h2>
+        <div class="products">
+            <!-- Product 1 -->
+            <div class="product-card" data-name="Fresh Apples" data-price="85">
+                <img src="../img/apple.jpg" alt="Apples">
+                <h3>Fresh Apples</h3>
+                <p>Price: 85rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+            <div class="product-card" data-name="Orange" data-price="169">
+                <img src="../img/orange.jpeg" alt="orange">
+                <h3>Orange</h3>
+                <p>Price: 169rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+             <div class="product-card" data-name="Banana" data-price="44">
+                <img src="../img/ban.jpeg" alt="banana">
+                <h3>Banana</h3>
+                <p>Price: 44rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+            <div class="product-card" data-name="carrot" data-price="42">
+                <img src="../img/car.jpeg" alt="carrot">
+                <h3>Carrot</h3>
+                <p>Price: 42rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            <!-- Add more product cards here as needed -->
+            <div class="product-card" data-name="Black grapes" data-price="89">
+                <img src="../img/b_gra.jpg" alt="b_gra">
+                <h3>Black grapes</h3>
+                <p>Price: 89rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+            <div class="product-card" data-name="Green grapes" data-price="120">
+                <img src="../img/g_gra.jpg" alt="G_gra">
+                <h3>Green Grapes</h3>
+                <p>Price: 120rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+             <div class="product-card" data-name="potato" data-price="30">
+                <img src="../img/pot.jpg" alt="potato">
+                <h3>potato</h3>
+                <p>Price: 30rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+            
+            <div class="product-card" data-name="water melon" data-price="70">
+                <img src="../img/watermelon.avif" alt="watermel">
+                <h3>Watermelon</h3>
+                <p>Price: 70rs/kg</p>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add products to the cart
+        function addToCart(button) {
+            const productCard = button.parentElement;
+            const name = productCard.dataset.name;
+            const price = productCard.dataset.price;
+
+            // Retrieve the cart from localStorage or create a new one
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Add the product to the cart
+            cart.push({ name, price });
+
+            // Save the updated cart to localStorage
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert(`${name} has been added to the cart!`);
+        }
+    </script>
+</body>
+</html>

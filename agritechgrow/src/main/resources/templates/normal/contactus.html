@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+    
+    <body>
+        <section >
+            <div th:if="${msg.getContent()} != null">
+                <!-- <div th:class="${message.getType()}" role="alert">
+                    <span th:text="${message.getContent()}"></span>
+                </div> -->
+                <div class="alert alert-success" role="alert">
+                    Mail sent successfully
+                </div>
+            </div>
+            <div class="contact-form">
+                <h2>Item Register</h2>
+                <form th:action="@{/user/processcontact}" method="post">
+                    <div class="form-group">
+                        <label for="name">Item Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <input type="text" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Quantity:</label>
+                        <input id="message" name="message" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit</button>
+                    </div>
+                            
+                    
+                </form>
+                
+            </div>
+            
+        </section>
+        
+    </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4e1c1; /* Light brown background color */
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .qr-code {
+            margin: 20px 0;
+        }
+        .actions button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .actions button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Payment</h2>
+        <p>Scan the QR code to complete your payment.</p>
+        <img src="../img/phonepay.png">
+        
+        <p><strong>Total Amount: </strong><span id="total-amount">0rs</span></p> <!-- Display total amount here -->
+
+        <div class="qr-code" id="qrcode"></div>
+
+        <div class="actions">
+            <button onclick="window.history.back()">Go Back</button>
+            <button onclick="redirectToFeedback()">Feedback</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to get URL parameter
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get the total amount from the URL
+        const totalAmount = getUrlParameter('total');
+
+        if (totalAmount) {
+            // Display the total amount in the page
+            document.getElementById("total-amount").textContent = `${totalAmount}rs`;
+
+            // Generate a QR code for the payment
+            const paymentInfo = `Payment Amount: ${totalAmount}rs`;
+            const qrCodeElement = document.getElementById("qrcode");
+            QRCode.toCanvas(qrCodeElement, paymentInfo, function(error) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    console.log('QR Code generated!');
+                }
+            });
+        } else {
+            alert("Invalid amount. Please try again.");
+        }
+
+        // Redirect to feedback page
+        function redirectToFeedback() {
+            window.location.href = "feedback"; // Update the URL to match the location of your feedback.html
+        }
+    </script>
+</body>
+</html>

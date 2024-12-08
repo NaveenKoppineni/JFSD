@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #D2B48C;
+            color: white;
+        }
+        .actions {
+            text-align: right;
+        }
+        .total-row {
+            font-weight: bold;
+            background-color: #f0e4d7;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #D2B48C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Cart</h2>
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be populated here -->
+            </tbody>
+            <tfoot>
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td id="total-price">0rs</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="actions">
+            <button>
+                <a href="/user/buyproducts">Go Back</a>
+            </button>
+            <button onclick="clearCart()">Clear Cart</button>
+            <button id="buy-now-btn" onclick="buyNow()" disabled>Buy Now</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to display cart items
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const cartTable = document.getElementById("cart-table").getElementsByTagName("tbody")[0];
+            const totalPriceElement = document.getElementById("total-price");
+            const buyNowButton = document.getElementById("buy-now-btn");
+            let total = 0;
+
+            cartTable.innerHTML = ""; // Clear existing rows
+
+            cart.forEach(item => {
+                const row = cartTable.insertRow();
+                const cellName = row.insertCell(0);
+                const cellPrice = row.insertCell(1);
+
+                cellName.textContent = item.name;
+                cellPrice.textContent = `${item.price}rs`;
+
+                // Add to total price
+                total += parseFloat(item.price);
+            });
+
+            // Update total price
+            totalPriceElement.textContent = `${total}rs`;
+
+            // Enable/Disable "Buy Now" button based on total price
+            if (total > 0) {
+                buyNowButton.disabled = false; // Enable button if total is greater than 0
+            } else {
+                buyNowButton.disabled = true; // Disable button if total is 0
+            }
+
+            // Display a message if the cart is empty
+            if (cart.length === 0) {
+                const row = cartTable.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 2;
+                cell.textContent = "Your cart is empty.";
+                totalPriceElement.textContent = "0rs";
+                buyNowButton.disabled = true; // Disable "Buy Now" button if cart is empty
+            }
+        }
+
+        // Function to clear the cart
+        function clearCart() {
+            localStorage.removeItem("cart");
+            displayCart();
+        }
+
+        // Function to simulate buying the products
+       // Function to simulate buying the products
+function buyNow() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+    if (total > 0) {
+        // Redirect to the payment page with the total amount as a URL parameter
+        window.location.href = `payment?total=${total}`;
+    } else {
+        alert("Your cart is empty. Add products to the cart first.");
+    }
+}
+
+
+        // Display the cart items on page load
+        displayCart();
+    </script>
+</body>
+</html>
